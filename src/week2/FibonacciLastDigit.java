@@ -1,36 +1,35 @@
 package week2;
 
+import java.math.BigInteger;
 import java.util.Scanner;
 
 public class FibonacciLastDigit {
 
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
-        int n = s.nextInt();
+        BigInteger n = s.nextBigInteger();
 
         System.out.println(fibHugeLastDigit(n));
     }
 
-    private static long fibHugeLastDigit(int n) {
+    private static BigInteger fibHugeLastDigit(BigInteger n) {
 
-        final int MOD = 1000000000;
-
-        if (n < 2) {
+        if (n.compareTo(BigInteger.valueOf(2)) < 0) {
             return n;
         }
 
-        long f0 = 0;
-        long fi = 1;
+        BigInteger f0 = new BigInteger("0");
+        BigInteger fi = new BigInteger("1");
 
-        for (int i=2; i<=n; i++) {
+        for (int i=2; BigInteger.valueOf(i).compareTo(n) <= 0; i++) {
 
-            long tmp = (f0 + fi) % MOD;
+            BigInteger tmp = f0.add(fi);
             f0 = fi;
             fi = tmp;
 
         }
 
-        return fi % 10;
+        return fi.mod(BigInteger.TEN);
     }
 
 }
